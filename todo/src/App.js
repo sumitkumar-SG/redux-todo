@@ -1,18 +1,37 @@
-import './App.css';
+import React from 'react'
+import "./App.css";
+import {incNumber} from "./actions";
+import {decNumber} from "./actions";
 
-function App() {
+import { useSelector, useDispatch } from "react-redux";
+
+const App = () => {
+
+  // it alternative to the useContext hooks in react / consumer from context API
+  const changeTheNumber = useSelector(state => state.changeTheNumber);
+  
+  const dispatch = useDispatch();
+
   return (
-    <div className='container'>
-      <h1>TODO USING REDUX</h1>
-      <h4>INCREMENT AND DECREMENT</h4>
+    <>
+      <div className="main-div">
+      
 
-      <div className='input'>
-        <button className='inc'>-</button>
-        <input type="text" className="val" value="0"></input>
-        <button className='dec'>+</button>
+      <div class="container">
+  
+      <h1>Increment/Decrement counter</h1>
+      <h4>using React and Redux</h4>
+      
+      <div class="quantity">
+        <a class="quantity__minus" title="Decrement" onClick={() => dispatch(decNumber())}><span>-</span></a>
+        <input name="quantity" type="text" class="quantity__input" value={changeTheNumber} />
+        <a class="quantity__plus" title="Increment" onClick={() => dispatch(incNumber(5))}><span>+</span></a>
       </div>
-    </div>
-  );
+  
+          </div>
+        </div>
+    </>
+  )
 }
 
-export default App;
+export default App
